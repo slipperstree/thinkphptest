@@ -20,6 +20,7 @@ return [
     'username'        => 'thinkphp_test',
     // 密码
     'password'        => 'dbtxs245100',
+    
     // 端口
     'hostport'        => '',
     // 连接dsn

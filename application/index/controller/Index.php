@@ -1,7 +1,9 @@
 <?php
 namespace app\index\controller;
+use think\Controller;
+use think\Db;
 
-class Index
+class Index extends Controller
 {
     public function index()
     {
@@ -9,8 +11,34 @@ class Index
 	return '你好ThinkPhp';
     }
 
-    public function hello($name = 'ThinkPHP5')
+    public function hello($name = 'ThinkPHP5', $pass = '123456')
     {
-        return 'hello,' . $name;
+        //dump($this->request);
+        //echo $this->request->param("name") . "<br>";
+        return 'hello,' . $name . ' with password:' . $pass;
+    }
+
+    public function search($name = 'chenling')
+    {
+        //dump(Db::table('users')->where('name', $name)->find());
+        dump(Db::table('users')->where('name', $name)->field('name, age')->find());
+    }
+
+    public function searchAll()
+    {
+        //dump(Db::query('select * from users'));
+        dump(Db::table('users')->order('age', 'asc')->select());
+    }
+
+    public function add($name, $age)
+    {
+        Db::table('users')->insert(['name'=>$name, 'age'=>$age]);
+        dump(Db::table('users')->where('name', $name)->find());
+    }
+
+    public function del($name)
+    {
+        Db::table('users')->where('name', $name)->delete();
+        dump(Db::query('select count(1) as cnt from users'));
     }
 }
