@@ -65,4 +65,8 @@ class Users
         $cnt = UsersModel::where("name", $name)->delete();
         return $cnt . '个用户删除成功';
     }
+
+    public function count(){
+        return "现在共有" . UsersModel::all()->count() . "个用户。"; 
+    }
 }
